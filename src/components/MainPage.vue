@@ -1,28 +1,33 @@
 <template>
 	<v-container>
-		<v-row class="justify-center mx-auto">
+		<v-row class="justify-center">
 			<v-col
-				class=""
-				cols="3"
+				cols="12"
+				md="8"
+				sm="10"
+				xs="12"
+				class="d-flex flex-column align-items-center"
 			>
-				<v-item-group class="">
-					<v-item
-						v-for="ability in abilityScores"
-						:key="ability.index"
-					>
-						<v-btn
-							:color="abilityScore === ability.index ? 'primary' : 'warning'"
-							outlined
-							x-large
-							class="m-1"
-							@click="abilityScore = ability.index"
-							>{{ ability.name }}</v-btn
+				<v-item-group>
+					<v-row class="justify-center">
+						<v-col
+							v-for="ability in abilityScores"
+							:key="ability.index"
+							cols="auto"
 						>
-					</v-item>
+							<v-btn
+								:color="abilityScore === ability.index ? 'primary' : 'warning'"
+								outlined
+								x-large
+								class="m-1"
+								@click="abilityScore = ability.index"
+							>{{ ability.name }}</v-btn>
+						</v-col>
+					</v-row>
 				</v-item-group>
 				<v-card
-					class="mx-auto mt-20"
-					width="500"
+					class="mt-10 m-auto"
+					width="100%"
 					max-width="500"
 					color="light-blue darken-4"
 				>
@@ -43,7 +48,6 @@
 						<div class="text--primary">Skills:</div>
 						<ul>
 							<li
-								class=""
 								v-for="(skill, index) in abilityScoresTotal.skills"
 								:key="index"
 							>
@@ -80,8 +84,6 @@ export default Vue.extend({
 	}),
 	watch: {
 		abilityScore() {
-			console.log('mudou');
-			console.log(this.$store.state.abilityScoresFull);
 			this.$store.dispatch('fetchAbilityScoresTotal', this.abilityScore);
 		},
 	},
