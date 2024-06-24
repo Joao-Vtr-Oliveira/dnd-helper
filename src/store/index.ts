@@ -1,5 +1,5 @@
-import { abilityScores, abilityScoresFull } from '@/types/abilityScoresType';
-import { dndClass } from '@/types/dndClass';
+import { abilityScoresFull } from '@/types/abilityScoresType';
+import { dndBase } from '@/types/dndBase';
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -7,17 +7,19 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
-		dndClasses: [] as dndClass[],
-		dndClass: {} as dndClass,
-    abilityScores: {} as abilityScores[],
+		dndClasses: [] as dndBase[],
+		dndClass: {} as dndBase,
+    abilityScores: {} as dndBase[],
 		abilityScoresTotal: {} as abilityScoresFull,
+		alignments: {} as dndBase[],
+		alignmentTotal: {} as abilityScoresFull,
 	},
 	getters: {},
 	mutations: {
-		changeClasses(state, payload: dndClass[]) {
+		changeClasses(state, payload: dndBase[]) {
 			state.dndClasses = payload;
 		},
-		changeAbilityScores(state, payload: abilityScores[]) {
+		changeAbilityScores(state, payload: dndBase[]) {
 			state.abilityScores = payload;
 		},
 		changeAbilityScoresTotal(state, payload: abilityScoresFull) {
@@ -27,12 +29,12 @@ export default new Vuex.Store({
 	actions: {
 		async fetchClassesData({ commit }) {
       const apiData = await fetch('https://www.dnd5eapi.co/api/classes');
-      const json: dndClass[] = await apiData.json();
+      const json: dndBase[] = await apiData.json();
       commit('changeClasses', json);
     },
 		async fetchAbilityScores({ commit }) {
       const apiData = await fetch('https://www.dnd5eapi.co/api/ability-scores');
-      const json: abilityScores[] = await apiData.json();
+      const json: dndBase[] = await apiData.json();
       commit('changeAbilityScores', json);
     },
 		async fetchAbilityScoresTotal({ commit }, ability: string) {

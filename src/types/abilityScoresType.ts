@@ -1,11 +1,7 @@
-export type abilityScores = {
-  index: string;
-  name: string;
-  url: string;
-}
+import { dndBase } from './dndBase';
 
-export interface abilityScoresFull extends abilityScores {
+export interface abilityScoresFull extends dndBase {
   "full_name": string;
   desc: string[],
-  skills: abilityScores[];
+  skills: dndBase[];
 }
