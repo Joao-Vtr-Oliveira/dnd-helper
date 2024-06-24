@@ -17,6 +17,7 @@
 						>
 							<v-btn
 								:color="abilityScore === ability.index ? 'primary' : 'warning'"
+								:disabled='abilityScore === ability.index'
 								outlined
 								x-large
 								class="m-1"
