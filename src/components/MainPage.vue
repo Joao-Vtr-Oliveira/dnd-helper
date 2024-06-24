@@ -11,7 +11,7 @@
 						:key="ability.index"
 					>
 						<v-btn
-							color="primary"
+							:color="abilityScore === ability.index ? 'primary' : 'warning'"
 							outlined
 							x-large
 							class="m-1"
