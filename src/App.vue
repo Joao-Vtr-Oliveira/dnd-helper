@@ -5,11 +5,10 @@
 			color="primary"
 			dark
 		>
-			<div class="d-flex align-center">
-				<v-icon>mdi-dice-d20</v-icon>
-
-				<h1>DnD Helper</h1>
-			</div>
+					<div class="d-flex align-center" @click='$router.push("/")'>
+						<v-icon>mdi-dice-d20</v-icon>
+						<h1>DnD Helper</h1>
+					</div>
 
 			<v-spacer></v-spacer>
 
@@ -42,9 +41,10 @@ import Vue from 'vue';
 export default Vue.extend({
 	name: 'App',
 	created() {
-      this.$store.dispatch('fetchClassesData');
-      this.$store.dispatch('fetchAbilityScores');
-    },
+		this.$store.dispatch('fetchClassesData');
+		this.$store.dispatch('fetchAbilityScores');
+		this.$store.dispatch('fetchAlignments');
+	},
 	data: () => ({
 		value: 1,
 	}),
