@@ -2,33 +2,38 @@
 	<v-container>
 		<v-row class="justify-center mx-auto">
 			<v-col
-				class=""
-				cols="7"
+				cols="12"
+				md="8"
+				sm="10"
+				xs="12"
+				class="d-flex flex-column align-items-center"
 			>
-				<v-item-group class="">
-					<v-item
-						v-for="alignment in alignments"
-						:key="alignment.index"
-					>
-						<v-btn
-							:color="actualAlignment === alignment.index ? 'secundary' : 'error'"
-							outlined
-							x-large
-							class="m-1"
-							@click="actualAlignment = alignment.index"
-							>{{ alignment.name }}</v-btn
+				<v-item-group>
+					<v-row class="justify-center">
+						<v-col
+							v-for="alignment in alignments"
+							:key="alignment.index"
+							cols="auto"
 						>
-					</v-item>
+							<v-btn
+								:color="actualAlignment === alignment.index ? 'secondary' : 'error'"
+								:disabled='actualAlignment === alignment.index'
+								outlined
+								x-large
+								class="m-1"
+								@click="actualAlignment = alignment.index"
+							>{{ alignment.name }}</v-btn>
+						</v-col>
+					</v-row>
 				</v-item-group>
-
 				<v-card
-					class="mx-auto mt-20"
-					width="500"
+					class="mt-10 m-auto"
+					width="100%"
 					max-width="500"
 					color="light-blue darken-4"
 				>
 					<v-card-text>
-						<div>Alignement</div>
+						<div>Alignment</div>
 						<p class="text-h4 text--primary">
 							{{ alignmentTotal.name }} - ({{ alignmentTotal.abbreviation }})
 						</p>
@@ -67,7 +72,6 @@ export default Vue.extend({
 			return this.$store.state.alignmentTotal as alignmentType;
 		},
 		alignments() {
-			console.log(this.$store.state.alignments.results);
 			return this.$store.state.alignments.results as dndBase[];
 		},
 	},
