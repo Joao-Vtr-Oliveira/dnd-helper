@@ -51,14 +51,11 @@ import { dndClass } from '@/types/dndClass';
 import { abilityScores, abilityScoresFull } from '../types/abilityScoresType';
 
 export default Vue.extend({
-	name: 'HelloWorld',
+	name: 'MainPage',
 	created() {
 		this.$store.dispatch('fetchAbilityScoresTotal', this.abilityScore);
 	},
 	computed: {
-		classes() {
-			return this.$store.state.dndClasses.results as dndClass[];
-		},
 		abilityScores() {
 			return this.$store.state.abilityScores.results as abilityScores[];
 		},
