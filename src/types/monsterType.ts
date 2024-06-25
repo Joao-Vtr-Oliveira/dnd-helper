@@ -29,7 +29,7 @@ export interface monsterType extends dndBase {
   };
 	strength: number;
 	dexterity: number;
-	constituition: number;
+	constitution: number;
 	intelligence: number;
 	wisdom: number;
 	charisma: number;
