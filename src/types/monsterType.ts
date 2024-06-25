@@ -21,7 +21,7 @@ export interface monsterType extends dndBase {
 	size: string;
 	type: string;
 	subtype: string;
-	aligment: string;
+	alignment: string;
 	armor_class: [{ value: number }];
 	hit_points: number;
   speed: {
