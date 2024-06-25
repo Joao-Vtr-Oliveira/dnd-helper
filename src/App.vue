@@ -75,7 +75,6 @@ export default Vue.extend({
 		drawer: false,
 	}),
 	created() {
-		this.$store.dispatch('fetchClassesData');
 		this.$store.dispatch('fetchAbilityScores');
 		this.$store.dispatch('fetchAlignments');
 		this.$store.dispatch('fetchMonsters');
