@@ -1,6 +1,7 @@
 import { abilityScoresFull } from '@/types/abilityScoresType';
 import { alignmentType } from '@/types/alignmentType';
 import { dndBase } from '@/types/dndBase';
+import { monsterType } from '@/types/monsterType';
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -12,6 +13,8 @@ export default new Vuex.Store({
 		abilityScoresTotal: {} as abilityScoresFull,
 		alignments: {} as dndBase[],
 		alignmentTotal: {} as alignmentType,
+		monsters: {} as dndBase[],
+		monster: {} as monsterType
 	},
 	getters: {},
 	mutations: {
@@ -22,12 +25,17 @@ export default new Vuex.Store({
 			state.abilityScoresTotal = payload;
 		},
 		changeAlignemnts(state, payload: dndBase[]) {
-			console.log(payload)
 			state.alignments = payload;
 		},
 		changeAlignemntsTotal(state, payload: alignmentType) {
 			state.alignmentTotal = payload;
 		},
+		changeMonsters(state, payload: dndBase[]) {
+			state.monsters = payload;
+		},
+		changeMonster(state, payload: monsterType) {
+			state.monster = payload;
+		}
 	},
 	actions: {
 		async fetchAbilityScores({ commit }) {
@@ -53,6 +61,18 @@ export default new Vuex.Store({
 			);
 			const json: abilityScoresFull = await apiData.json();
 			commit('changeAlignemntsTotal', json);
+		},
+		async fetchMonsters({ commit }) {
+      const apiData = await fetch('https://www.dnd5eapi.co/api/monsters');
+      const json: dndBase[] = await apiData.json();
+      commit('changeMonsters', json);
+    },
+		async fetchMonster({ commit }, index: string) {
+			const apiData = await fetch(
+				`https://www.dnd5eapi.co/api/monsters/${index}`
+			);
+			const json: abilityScoresFull = await apiData.json();
+			commit('changeMonster', json);
 		},
 	},
 	modules: {},
