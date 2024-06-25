@@ -8,8 +8,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
-		dndClasses: [] as dndBase[],
-		dndClass: {} as dndBase,
 		abilityScores: {} as dndBase[],
 		abilityScoresTotal: {} as abilityScoresFull,
 		alignments: {} as dndBase[],
@@ -17,9 +15,6 @@ export default new Vuex.Store({
 	},
 	getters: {},
 	mutations: {
-		changeClasses(state, payload: dndBase[]) {
-			state.dndClasses = payload;
-		},
 		changeAbilityScores(state, payload: dndBase[]) {
 			state.abilityScores = payload;
 		},
@@ -35,11 +30,6 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		async fetchClassesData({ commit }) {
-			const apiData = await fetch('https://www.dnd5eapi.co/api/classes');
-			const json: dndBase[] = await apiData.json();
-			commit('changeClasses', json);
-		},
 		async fetchAbilityScores({ commit }) {
 			const apiData = await fetch('https://www.dnd5eapi.co/api/ability-scores');
 			const json: dndBase[] = await apiData.json();
