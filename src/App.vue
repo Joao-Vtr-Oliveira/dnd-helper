@@ -5,22 +5,39 @@
 			color="primary"
 			dark
 		>
-			<v-app-bar-nav-icon class="d-flex d-sm-none" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-			<div class="d-flex align-center" @click='$router.push("/")'>
+			<v-app-bar-nav-icon
+				class="d-flex d-sm-none"
+				@click.stop="drawer = !drawer"
+			></v-app-bar-nav-icon>
+			<div
+				class="d-flex align-center"
+				@click="route === '/' ? '' : $router.push('/')"
+			>
 				<v-icon>mdi-dice-d20</v-icon>
 				<h1 class="ml-2">DnD Helper</h1>
 			</div>
 			<v-spacer></v-spacer>
 			<v-row class="d-none d-sm-flex">
-				<v-btn class="mr-2" @click='$router.push("/")'>
+				<v-btn
+					:disabled="route === '/'"
+					class="mr-2"
+					@click="$router.push('/')"
+				>
 					<span>Ability Scores</span>
 					<v-icon>mdi-tooltip-question</v-icon>
 				</v-btn>
-				<v-btn class="mr-2" @click="$router.push('/alignment')">
+				<v-btn
+					:disabled="route === '/alignment'"
+					class="mr-2"
+					@click="$router.push('/alignment')"
+				>
 					<span>Alignment</span>
 					<v-icon>mdi-account-star</v-icon>
 				</v-btn>
-				<v-btn @click="$router.push('/monsters')">
+				<v-btn
+					:disabled="route === '/monsters'"
+					@click="$router.push('/monsters')"
+				>
 					<span>Monster list</span>
 					<v-icon>mdi-list-box</v-icon>
 				</v-btn>
@@ -33,7 +50,10 @@
 			temporary
 		>
 			<v-list dense>
-				<v-list-item @click='$router.push("/")'>
+				<v-list-item
+					:disabled="route === '/'"
+					@click="$router.push('/')"
+				>
 					<v-list-item-action>
 						<v-icon>mdi-tooltip-question</v-icon>
 					</v-list-item-action>
@@ -41,7 +61,10 @@
 						<v-list-item-title>Ability Scores</v-list-item-title>
 					</v-list-item-content>
 				</v-list-item>
-				<v-list-item @click="$router.push('/alignment')">
+				<v-list-item
+					:disabled="route === '/alignment'"
+					@click="$router.push('/alignment')"
+				>
 					<v-list-item-action>
 						<v-icon>mdi-account-star</v-icon>
 					</v-list-item-action>
@@ -49,7 +72,10 @@
 						<v-list-item-title>Alignment</v-list-item-title>
 					</v-list-item-content>
 				</v-list-item>
-				<v-list-item @click="$router.push('/monsters')">
+				<v-list-item
+					:disabled="route === '/monsters'"
+					@click="$router.push('/monsters')"
+				>
 					<v-list-item-action>
 						<v-icon>mdi-list-box</v-icon>
 					</v-list-item-action>
@@ -78,6 +104,11 @@ export default Vue.extend({
 		this.$store.dispatch('fetchAbilityScores');
 		this.$store.dispatch('fetchAlignments');
 		this.$store.dispatch('fetchMonsters');
+	},
+	computed: {
+		route() {
+			return this.$route.fullPath;
+		},
 	},
 });
 </script>
