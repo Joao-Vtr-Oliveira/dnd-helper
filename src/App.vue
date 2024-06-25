@@ -13,19 +13,19 @@
 			<v-spacer></v-spacer>
 
 			<div>
-				<v-btn class="mr-2">
-					<span>Recents</span>
-					<v-icon>mdi-history</v-icon>
+				<v-btn class="mr-2" @click='$router.push("/")'>
+					<span>Ability Scores</span>
+					<v-icon>mdi-tooltip-question</v-icon>
 				</v-btn>
 
-				<v-btn class="mr-2">
-					<span>Favorites</span>
-					<v-icon>mdi-heart</v-icon>
+				<v-btn class="mr-2" @click="$router.push('/alignment')">
+					<span>Alignment</span>
+					<v-icon>mdi-account-star</v-icon>
 				</v-btn>
 
-				<v-btn>
-					<span>Nearby</span>
-					<v-icon>mdi-map-marker</v-icon>
+				<v-btn @click="$router.push('/monsters')">
+					<span>Monster list</span>
+					<v-icon>mdi-list-box</v-icon>
 				</v-btn>
 			</div>
 		</v-app-bar>
