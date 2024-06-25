@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AlignmentView from '@/views/AlignmentView.vue'
 import MonsterView from '@/views/MonsterView.vue'
+import MonsterInfoView from '@/views/MonsterInfoView.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes: Array<RouteConfig> = [
     path: '/monsters',
     name: 'monsters',
     component: MonsterView
+  },
+  {
+    path: '/monster/:id',
+    name: 'monster-info',
+    component: MonsterInfoView
   },
 ]
 
