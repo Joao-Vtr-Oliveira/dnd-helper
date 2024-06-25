@@ -44,9 +44,9 @@ export default Vue.extend({
 		this.$store.dispatch('fetchClassesData');
 		this.$store.dispatch('fetchAbilityScores');
 		this.$store.dispatch('fetchAlignments');
+		this.$store.dispatch('fetchMonsters');
 	},
 	data: () => ({
-		value: 1,
 	}),
 });
 </script>
