@@ -21,30 +21,34 @@
 								outlined
 								x-large
 								class="m-1"
-								@click="actualAlignment = alignment.index"
+								@click="changeAlignment(alignment.index)"
 							>{{ alignment.name }}</v-btn>
 						</v-col>
 					</v-row>
 				</v-item-group>
-				<v-card
-					class="mt-10 m-auto"
-					width="100%"
-					max-width="500"
-					color="light-blue darken-4"
-				>
-					<v-card-text>
-						<div>Alignment</div>
-						<p class="text-h4 text--primary">
-							{{ alignmentTotal.name }} - ({{ alignmentTotal.abbreviation }})
-						</p>
-						<div class="text--primary">Desc:</div>
-						<ul>
-							<li>
-								{{ alignmentTotal.desc }}
-							</li>
-						</ul>
-					</v-card-text>
-				</v-card>
+				<transition name="fade" mode="out-in">
+					<v-card
+						v-if="showCard"
+						class="mt-10 m-auto"
+						width="100%"
+						max-width="500"
+						color="light-blue darken-4"
+						key="card"
+					>
+						<v-card-text>
+							<div>Alignment</div>
+							<p class="text-h4 text--primary">
+								{{ alignmentTotal.name }} - ({{ alignmentTotal.abbreviation }})
+							</p>
+							<div class="text--primary">Desc:</div>
+							<ul>
+								<li>
+									{{ alignmentTotal.desc }}
+								</li>
+							</ul>
+						</v-card-text>
+					</v-card>
+				</transition>
 			</v-col>
 		</v-row>
 	</v-container>
@@ -53,7 +57,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import { dndBase } from '@/types/dndBase';
-import { abilityScoresFull } from '../types/abilityScoresType';
 import { alignmentType } from '@/types/alignmentType';
 
 export default Vue.extend({
@@ -62,22 +65,26 @@ export default Vue.extend({
 		this.$store.dispatch('fetchAlignmentsTotal', this.actualAlignment);
 	},
 	computed: {
-		abilityScores() {
-			return this.$store.state.abilityScores.results as dndBase[];
-		},
-		abilityScoresTotal() {
-			return this.$store.state.abilityScoresTotal as abilityScoresFull;
+		alignments() {
+			return this.$store.state.alignments.results as dndBase[];
 		},
 		alignmentTotal() {
 			return this.$store.state.alignmentTotal as alignmentType;
 		},
-		alignments() {
-			return this.$store.state.alignments.results as dndBase[];
-		},
 	},
 	data: () => ({
 		actualAlignment: 'chaotic-good',
+		showCard: true,
 	}),
+	methods: {
+		changeAlignment(newAlignment: string) {
+			this.showCard = false;
+			setTimeout(() => {
+				this.actualAlignment = newAlignment;
+				this.showCard = true;
+			}, 300);
+		},
+	},
 	watch: {
 		actualAlignment() {
 			this.$store.dispatch('fetchAlignmentsTotal', this.actualAlignment);
@@ -85,3 +92,12 @@ export default Vue.extend({
 	},
 });
 </script>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+	transition: opacity 0.3s ease;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+	opacity: 0;
+}
+</style>
